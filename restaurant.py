@@ -33,10 +33,10 @@ def validar_rut():
     while True:
         try:
             rut=int(input("ingrese su rut: "))
-            if rut>=10000000 and rut <=99999999:
+            if rut>=1000000 and rut <=99999999:
                 break
             else:
-                print("ingrese un rut entre un millo y 99 millones")
+                print("ingrese un rut entre un millon y 99 millones")
         except:
             print("ingrese el rut sin guion ni rut verificador")
     return rut
@@ -57,7 +57,7 @@ def reserva(mesas,cant):
                     if len(nombre.strip())>3 and nombre.isalpha():
                         break
                     else:
-                        print("el nombre debe tener una logitud de mas de 3 caracteres ")
+                        print("el nombre debe ser mayor a 3 caracters y solo letras ")
                 while True:
                     correo=input("ingrese su correo: ")
                     for i in correo:
@@ -151,6 +151,9 @@ cant=np.array([[2,2,2],[4,4,4],[6,6,6]],int)
 lista_clientes=[]
 lista_reservas=[]
 lista_pedidos=[]
+stock_bebidas=[100,100,100]
+stock_platos=[65,65,65]
+stock_postres=[75,75,75]
 lista_bebidas=[['1-cococola $1000','2-pepsi $1000','3-watss $700'],
                [1000,1000,700]]
 lista_platos=[['1-arroz $3200','2-fideos $3000','3-potoros $3000'],
@@ -210,56 +213,91 @@ while True:
                             op=validar_cantidad(0,4,'bebida')
                             
                             if op==1:
-                                cant=validar_cantidad(0,55,'cantidad de cocacolas')
-                                precio=compra(cant=cant,lista=lista_bebidas,posi=0)
-                                suma_bebidas+=precio
-                                cant_bedidas+=cant
+                                cant=validar_cantidad(0,101,'cantidad de cocacolas')
+                                if stock_bebidas[0]>=cant:
+                                    precio=compra(cant=cant,lista=lista_bebidas,posi=0)
+                                    suma_bebidas+=precio
+                                    cant_bedidas+=cant
+                                    stock_bebidas[0]-=cant
+                                else:
+                                    print("no hay cocacolas ")
                             elif op==2:
-                                cant=validar_cantidad(0,55,'cantidad de pepesis')
-                                precio=compra(cant=cant,lista=lista_bebidas,posi=1)
-                                suma_bebidas+=precio
-                                cant_bedidas+=cant
+                                cant=validar_cantidad(0,101,'cantidad de pepesis')
+                                if stock_bebidas[1]>=cant:
+                                    precio=compra(cant=cant,lista=lista_bebidas,posi=1)
+                                    suma_bebidas+=precio
+                                    cant_bedidas+=cant
+                                    stock_bebidas[1]-=cant
+                                else:
+                                    print("no pepisis")
                             else:
-                                cant=validar_cantidad(0,55,'cantidad de watss')
-                                precio=compra(cant=cant,lista=lista_bebidas,posi=2)
-                                suma_bebidas+=precio
-                                cant_bedidas+=cant
+                                cant=validar_cantidad(0,101,'cantidad de watss')
+                                if stock_bebidas[2]>=cant:
+                                    precio=compra(cant=cant,lista=lista_bebidas,posi=2)
+                                    suma_bebidas+=precio
+                                    cant_bedidas+=cant
+                                    stock_bebidas[2]-=cant
+                                else:
+                                    print("no hay watts")
                         elif op==2:
                             imprimir_alimentos(lista=lista_platos)
                             op=validar_cantidad(0,4,'platos')
                             if op==1:
-                                cant=validar_cantidad(0,55,'de platos de arroz')
-                                precio=compra(cant=cant,lista=lista_platos,posi=0)
-                                suma_platos+=precio
-                                cant_platos+=cant
+                                cant=validar_cantidad(0,66,'de platos de arroz')
+                                if stock_platos[0]>=cant:
+                                    precio=compra(cant=cant,lista=lista_platos,posi=0)
+                                    suma_platos+=precio
+                                    cant_platos+=cant
+                                    stock_platos[0]-=cant
+                                else:
+                                    print("no hay platos de arroz")
                             elif op==2:
-                                cant=validar_cantidad(0,55,'de platos de fideos')
-                                precio=compra(cant=cant,lista=lista_platos,posi=1)
-                                suma_platos+=precio
-                                cant_platos+=cant
+                                cant=validar_cantidad(0,66,'de platos de fideos')
+                                if stock_platos[1]>=cant:
+                                    precio=compra(cant=cant,lista=lista_platos,posi=1)
+                                    suma_platos+=precio
+                                    cant_platos+=cant
+                                    stock_platos[1]-=cant
+                                else:
+                                    print("no hay platos de fideos ")
                             else:
-                                cant=validar_cantidad(0,55,'de platos de porotos')
-                                precio=compra(cant=cant,lista=lista_platos,posi=2)
-                                suma_platos+=precio
-                                cant_platos+=cant
+                                cant=validar_cantidad(0,66,'de platos de porotos')
+                                if stock_platos[2]>=cant:
+                                    precio=compra(cant=cant,lista=lista_platos,posi=2)
+                                    suma_platos+=precio
+                                    cant_platos+=cant
+                                    stock_platos[2]-=cant
+                                else:
+                                     print("no hay platos de porotos ")
                         elif op==3:
                             imprimir_alimentos(lista=lista_postres)
                             op=validar_cantidad(0,4,'postres')
                             if op==1:
-                                cant=validar_cantidad(0,55,'de chanels')
-                                precio=compra(cant=cant,lista=lista_postres,posi=0)
-                                suma_postres+=precio
-                                cant_postres+=cant
+                                cant=validar_cantidad(0,66,'de chanels')
+                                if stock_postres[0]>=cant:
+                                    precio=compra(cant=cant,lista=lista_postres,posi=0)
+                                    suma_postres+=precio
+                                    cant_postres+=cant
+                                    stock_postres[0]-=cant
+                                else:
+                                    print("no hay chanels")
                             elif op==2:
-                                cant=validar_cantidad(0,55,'de suspiros alimenños')
-                                precio=compra(cant=cant,lista=lista_postres,posi=1)
-                                suma_postres+=precio
-                                cant_postres+=cant
+                                cant=validar_cantidad(0,66,'de suspiros alimenños')
+                                if stock_postres[1]>=cant:
+                                    precio=compra(cant=cant,lista=lista_postres,posi=1)
+                                    suma_postres+=precio
+                                    cant_postres+=cant
+                                    stock_postres[1]-=cant
+                                print("no hay suspiros alimeños")
                             else:
-                                cant=validar_cantidad(0,55,'de yogurts')
-                                precio=compra(cant=cant,lista=lista_postres,posi=2)
-                                suma_postres+=precio
-                                cant_postres+=cant
+                                cant=validar_cantidad(0,66,'de yogurts')
+                                if stock_postres[2]>=cant:
+                                    precio=compra(cant=cant,lista=lista_postres,posi=2)
+                                    suma_postres+=precio
+                                    cant_postres+=cant
+                                    stock_postres[2]-=cant
+                                else:
+                                    print("no hay yogurts")
                         else:
                             break
                 elif op==2:
@@ -300,15 +338,18 @@ while True:
             iva=sub_total*0.19
             total=sub_total+iva
             propina=total*0.10
+            total+=propina
             if total>0:
                 while True:
                     print(f"""
-                    -subtotal {sub_total}
-                    -Iva {iva}
+                    -subtotal ${sub_total}
+                    -Iva ${iva}
                     ------------
 
-                    total  {total}
-                    propina {propina}
+                    propina  ${propina}
+                    ------------
+
+                    total  ${total}
                     """)
                     while True:
                         try:
